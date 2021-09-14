@@ -16,12 +16,12 @@
 				<table class="table table-striped ">
 					<thead>
 					<tr>
-						<th v-for="(title, index) of rows[0]" :key="index"> {{title}} </th>
+						<th v-for="(cell, index) in header" :key="index"> {{ cell }} </th>
 					</tr>
 					</thead>
 					
 					<tbody>
-						<Row :key="row.id" v-for="row in rows" :row="row" />
+						<Row :key="row.devId" v-for="row in rows" :row="row" />
 					</tbody>
 				</table>
 				</div>
@@ -46,6 +46,9 @@ const creds = require('@/client_secret.json');
 				loading: true,
 			}
 		},
+		created() {
+			this.accessSpreadSheet();
+		},
 		methods:{
 			async accessSpreadSheet() {
 				const doc = new GoogleSpreadsheet('1lei8ZdcTPPEP3DXpTMZHdGLCQyCr63adgJWL1LCe2zI');
@@ -53,16 +56,13 @@ const creds = require('@/client_secret.json');
 				await doc.loadInfo(); 
 				const sheet = doc.sheetsByIndex[0];
 				const  rows = await sheet.getRows({
-					offset: -1
+					offset: 0
 				})
+				const header = await sheet.headerValues
+				this.header = header
 				this.rows = rows;
-				console.log(this.rows)
 			}
-		},
-		created() {
-			this.accessSpreadSheet();
 		}
-		
 	}
 </script>
 

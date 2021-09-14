@@ -1,10 +1,6 @@
 <template>
 	<tr>
-		<td v-for="(cell, index) in row" :key="index"> {{row[cell]}} </td>
-		<td>{{row.phone}}</td>
-		<td>{{row.activity}}</td>
-		<td>{{row.city}}</td>
-		{{ row }}
+		<td v-for="(cell, index) in row._rawData" :key="index"> {{ cell }} </td>
 	</tr>
 </template>
 
@@ -12,8 +8,17 @@
 	export default {
 		name: "Row",
 		props: ["row"],
+		mounted () {
+			console.log(this.row._rawData)
+		},
+		methods: {
+			logRowData() {
+				this.$props.row.forEach(element => {
+					console.log(element._rawData)
+				});
+			}
+		}
 	}
-	
 </script>
 
 <style scoped>
