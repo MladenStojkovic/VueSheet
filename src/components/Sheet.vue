@@ -60,7 +60,7 @@ const creds = require('@/client_secret.json');
 				})
 				const header = await sheet.headerValues
 				this.header = header
-				this.rows = rows;
+				this.rows = rows
 			}
 		}
 	}
