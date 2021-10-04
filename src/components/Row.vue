@@ -1,6 +1,6 @@
 <template>
 	<tr>
-		<td v-for="(cell, index) in row._rawData" :key="index"> {{ cell }} </td>
+		<td v-for="(cell, index) in row" :key="index"> {{ cell }} </td>
 	</tr>
 </template>
 
