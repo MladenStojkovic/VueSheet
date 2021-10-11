@@ -1,5 +1,7 @@
 <template>
 	<div class="container-fluid">
+		<loading :active.sync="loading" 
+        :is-full-page="false"/>
 		<div class="row">
 			<main role="main" class="col-md-12 ml-sm-auto col-lg-12 pt-3 px-4">
 				<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 ">
@@ -20,28 +22,41 @@
 				<table class="table table-striped ">
 					<thead>
 					<tr>
-						<th v-for="(cell, index) in header" :key="index"> {{ cell }} </th>
+						<th> {{ header[0] }} </th>
+						<th> {{ header[1] }} </th>
+						<th> {{ header[2] }} </th>
+						<th> {{ header[3] }} </th>
+						<th> {{ header[4] }} </th>
+						<th> {{ header[5] }} </th>
+						<th> {{ header[6] }} </th>
+						<th> {{ header[7] }} </th>
 					</tr>
 					</thead>
 					
 					<tbody>
-						<Row :key="row.devId" v-for="row in filteredData" :row="row" />
+						<Row :key="row.devId" v-for="(row, index) in filteredData" :row="row" :rowIndex="index" @view-details="doIt" />
 					</tbody>
 				</table>
 				</div>
 			</main>
 		</div>
+		<modal />
 	</div>
 </template>
  
 <script>
 import Row from '@/components/Row.vue';
+import Modal from '@/components/Modal.vue'
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
 const { GoogleSpreadsheet } = require('google-spreadsheet');
 const creds = require('@/client_secret.json');
 	export default {
 		name: "Sheet",
 		components: {
-			Row
+			Row,
+			Loading,
+			Modal
 		},
 		props: ["sheet"],
 		data() {
@@ -51,13 +66,15 @@ const creds = require('@/client_secret.json');
 				filterRowIndex: 0,
 				filter: '',
 				loading: true,
+				action: '',
+				actionRow: ''
 			}
 		},
 		computed: {
 			filteredData() {
 				if (this.filter) {
 					return this.rows.filter(row => {
-					const filter = this.filter.toLowerCase()
+					const filter = this.filter
 					return row[this.filterRowIndex].includes(filter)
 				})
 				} else return this.rows
@@ -80,10 +97,17 @@ const creds = require('@/client_secret.json');
 				rows.forEach(row => {
 					this.rows.push(row._rawData)
 				})
+				this.loading = false
 				console.log(this.rows)
+				console.log(this.header)
 			},
 			switchView(event, selectedIndex) {
 				this.filterRowIndex = selectedIndex
+			},
+			doIt(e, row) {
+				this.action = e
+				this.actionRow = row
+				this.$modal.show('my-first-modal')
 			}
 		}
 	}

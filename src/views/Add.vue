@@ -1,5 +1,9 @@
 <template>
 	<div class="container-fluid">
+		<loading :active.sync="loading" 
+        :can-cancel="true" 
+        :on-cancel="onCancel"
+        :is-full-page="fullPage"/>
 		<div class="row">
 			<main role="main" class="col-md-12 ml-sm-auto col-lg-12 pt-3 px-4">
 				<div class="container">
@@ -42,22 +46,18 @@
 									<input type="text" v-model="seniority" class="form-control" id="seniority" placeholder="ex: Algiers" required>
 								</div>
 								<div class="col-md-3 mb-3">
-									<label for="dateFrom">dateFrom</label>
-									<input type="text" v-model="dateFrom" class="form-control" id="dateFrom" required>
-								</div>
-								<div class="col-md-3 mb-3">
-									<label for="dateTo">dateTo</label>
-									<input type="text" v-model="dateTo" class="form-control" id="dateTo" required>
+									<label for="updated">updated</label>
+									<input type="text" v-model="updated" class="form-control" id="updated" required>
 								</div>
 								<div class="col-md-6 mb-3">
 									<label for="comment">comment</label>
 									<input type="text" v-model="comment" class="form-control" id="comment" required>
 								</div>
-								<div class="col-md-2 mb-3">
+								<div class="col-md-3 mb-3">
 									<label for="grade">grade</label>
 									<input type="text" v-model="grade" class="form-control" id="grade" required>
 								</div>
-								<div class="col-md-10 mb-3">
+								<div class="col-md-12 mb-3">
 									<label for="description">description</label>
 									<input type="text" v-model="description" class="form-control" id="description" required>
 								</div>
@@ -174,18 +174,22 @@
 </template>
 
 <script>
+	import Loading from 'vue-loading-overlay';
+	import 'vue-loading-overlay/dist/vue-loading.css';
 	const { GoogleSpreadsheet } = require('google-spreadsheet');
 	const creds = require('@/client_secret.json');
 	export default {
 		name: "AddRow",
+		components: {
+			Loading
+		},
 		data() {
 			return {
 				devId: '',
 				name: '',
 				position: '',
 				seniority: '',
-				dateFrom: '',
-				dateTo: '',
+				updated: '',
 				comment : '',
 				grade: '',
 				description: '',
@@ -208,19 +212,20 @@
 				utest: '',
 				designtools: '',
 
-				showMsg: false
+				showMsg: false,
+				loading: false
 
 			}
 		},
 		methods: {
 			async addRow() {
+				this.loading = true
 				const newRow = {
 					devId: this.devId,
 					name: this.name,
 					position: this.position,
 					seniority: this.seniority,
-					dateFrom: this.dateFrom,
-					dateTo: this.dateTo,
+					updated: this.updated,
 					comment :this.comment,
 					grade: this.grade,
 					description: this.description,
@@ -254,8 +259,7 @@
 				this.name = ''
 				this.position = ''
 				this.seniority = ''
-				this.dateFrom = ''
-				this.dateTo = ''
+				this.updated = ''
 				this.comment = ''
 				this.grade = ''
 				this.description = ''
@@ -280,7 +284,7 @@
 
 				this.message = "New row added !";
 				this.showMsg = true;
-
+				this.loading = false
 				
 			}
 		}
