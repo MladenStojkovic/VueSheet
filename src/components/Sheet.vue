@@ -40,7 +40,7 @@
 				</div>
 			</main>
 		</div>
-		<modal />
+		<modal :action="action" :rowIndex="actionRow" :row="filteredData[actionRow]"/>
 	</div>
 </template>
  
