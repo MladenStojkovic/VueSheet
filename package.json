@@ -15,6 +15,7 @@
     "sheetsu-node": "0.0.7",
     "vue": "^2.6.11",
     "vue-awesome": "^4.3.1",
+    "vue-js-modal": "^2.0.1",
     "vue-loading-overlay": "3.0",
     "vue-router": "^3.1.6",
     "vuex": "^3.1.3"
