@@ -11,92 +11,92 @@
 
           <div class="col-md-12 grade">
             <p>html</p>
-            <p>  {{row[7]}} </p>
-          </div>
-
-          <div class="col-md-12 grade">
-            <p>css</p>
             <p>  {{row[8]}} </p>
           </div>
 
           <div class="col-md-12 grade">
-            <p>scss</p>
+            <p>css</p>
             <p>  {{row[9]}} </p>
           </div>
 
           <div class="col-md-12 grade">
-            <p>less</p>
+            <p>scss</p>
             <p>  {{row[10]}} </p>
           </div>
 
           <div class="col-md-12 grade">
-            <p>bootstrap</p>
+            <p>less</p>
             <p>  {{row[11]}} </p>
           </div>
 
           <div class="col-md-12 grade">
-            <p>javascript</p>
+            <p>bootstrap</p>
             <p>  {{row[12]}} </p>
           </div>
 
           <div class="col-md-12 grade">
-            <p>jQuery</p>
+            <p>javascript</p>
             <p>  {{row[13]}} </p>
           </div>
 
           <div class="col-md-12 grade">
-            <p>angular</p>
+            <p>jQuery</p>
             <p>  {{row[14]}} </p>
           </div>
 
           <div class="col-md-12 grade">
-            <p>react</p>
+            <p>angular</p>
             <p>  {{row[15]}} </p>
           </div>
 
           <div class="col-md-12 grade">
-            <p>vue</p>
+            <p>react</p>
             <p>  {{row[16]}} </p>
           </div>
 
           <div class="col-md-12 grade">
-            <p>svelte</p>
+            <p>vue</p>
             <p>  {{row[17]}} </p>
           </div>
 
           <div class="col-md-12 grade">
-            <p>npm</p>
+            <p>svelte</p>
             <p>  {{row[18]}} </p>
           </div>
 
           <div class="col-md-12 grade">
-            <p>yarn</p>
+            <p>npm</p>
             <p>  {{row[19]}} </p>
           </div>
 
           <div class="col-md-12 grade">
-            <p>typescript</p>
+            <p>yarn</p>
             <p>  {{row[20]}} </p>
           </div>
 
           <div class="col-md-12 grade">
-            <p>vuex</p>
+            <p>typescript</p>
             <p>  {{row[21]}} </p>
           </div>
 
           <div class="col-md-12 grade">
-            <p>redux</p>
+            <p>vuex</p>
             <p>  {{row[22]}} </p>
           </div>
 
           <div class="col-md-12 grade">
-            <p>utest</p>
+            <p>redux</p>
             <p>  {{row[23]}} </p>
           </div>
 
           <div class="col-md-12 grade">
-            <p>design tools</p>
+            <p>utest</p>
             <p>  {{row[24]}} </p>
+          </div>
+
+          <div class="col-md-12 grade">
+            <p>design tools</p>
+            <p>  {{row[25]}} </p>
           </div>
         </div>
       </div>
@@ -114,32 +114,32 @@
 
           <div class="col-md-12 grade">
             <p>C#</p>
-            <p>  {{row[25]}} </p>
-          </div>
-
-          <div class="col-md-12 grade">
-            <p>Java</p>
             <p>  {{row[26]}} </p>
           </div>
 
           <div class="col-md-12 grade">
-            <p>Node</p>
+            <p>Java</p>
             <p>  {{row[27]}} </p>
           </div>
 
           <div class="col-md-12 grade">
-            <p>PHP</p>
+            <p>Node</p>
             <p>  {{row[28]}} </p>
           </div>
 
           <div class="col-md-12 grade">
-            <p>MySQL</p>
+            <p>PHP</p>
             <p>  {{row[29]}} </p>
           </div>
 
           <div class="col-md-12 grade">
-            <p>NoSQL</p>
+            <p>MySQL</p>
             <p>  {{row[30]}} </p>
+          </div>
+
+          <div class="col-md-12 grade">
+            <p>NoSQL</p>
+            <p>  {{row[31]}} </p>
           </div>
 
         </div>
@@ -157,22 +157,22 @@
 
           <div class="col-md-12 grade">
             <p>jMeter</p>
-            <p>  {{row[31]}} </p>
-          </div>
-
-          <div class="col-md-12 grade">
-            <p>Postman</p>
             <p>  {{row[32]}} </p>
           </div>
 
           <div class="col-md-12 grade">
-            <p>Selenium</p>
+            <p>Postman</p>
             <p>  {{row[33]}} </p>
           </div>
 
           <div class="col-md-12 grade">
-            <p>Cypress</p>
+            <p>Selenium</p>
             <p>  {{row[34]}} </p>
+          </div>
+
+          <div class="col-md-12 grade">
+            <p>Cypress</p>
+            <p>  {{row[35]}} </p>
           </div>
 
         </div>
@@ -190,22 +190,22 @@
 
           <div class="col-md-12 grade">
             <p>Jenkins</p>
-            <p>  {{row[35]}} </p>
-          </div>
-
-          <div class="col-md-12 grade">
-            <p>Git</p>
             <p>  {{row[36]}} </p>
           </div>
 
           <div class="col-md-12 grade">
-            <p>Batch scripting</p>
+            <p>Git</p>
             <p>  {{row[37]}} </p>
           </div>
 
           <div class="col-md-12 grade">
-            <p>Bash scripting</p>
+            <p>Batch scripting</p>
             <p>  {{row[38]}} </p>
+          </div>
+
+          <div class="col-md-12 grade">
+            <p>Bash scripting</p>
+            <p>  {{row[39]}} </p>
           </div>
 
         </div>

@@ -6,7 +6,7 @@
 			<main role="main" class="col-md-12 ml-sm-auto col-lg-12 pt-3 px-4">
 				<div class="container">
 					<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mt-3 ">
-						<h4 class="mb-3">New row</h4>
+						<h4 class="mb-3">Edit row</h4>
 						<div class="btn-toolbar mb-2 mb-md-0">
 							<router-link to="/"  class="btn btn-sm mr-1 btn-outline-secondary">
 								Back
@@ -371,7 +371,6 @@
 				this.name = this.$props.row[1]
 				this.position = this.$props.row[2]
 				this.seniority = this.$props.row[3]
-				this.updated = this.$props.row[4]
 				this.comment = this.$props.row[5]
 				this.grade = this.$props.row[6]
 				this.description = this.$props.row[7]

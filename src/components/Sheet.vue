@@ -4,13 +4,13 @@
         :is-full-page="false"/>
 		<div class="row" v-if="!loading">
 			<main role="main" class="col-md-12 ml-sm-auto col-lg-12 pt-3 px-4">
-				<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 ">
+				<div class="d-flex flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 ">
 					<h2>VueSheet List</h2>
-					<select name="" id="" @change="switchView($event,	$event.target.selectedIndex)">
+					<select class="ml-5 mr-1 select-box form-control" name="" id="" @change="switchView($event,	$event.target.selectedIndex)">
 						<option :value="index" v-for="(rowHeader, index) in header" :key="index"> {{rowHeader}} </option>
 					</select>
-					<input type="text" v-model="filter">
-					<div class="btn-toolbar mb-2 mb-md-0">
+					<input type="text" v-model="filter" class="form-control input-box">
+					<div class="btn-toolbar mb-2 mb-md-0 btn-sheets">
 						<a 	href="https://docs.google.com/spreadsheets/d/1lei8ZdcTPPEP3DXpTMZHdGLCQyCr63adgJWL1LCe2zI/edit?usp=sharing" 
 							class="btn btn-sm btn-outline-secondary"
 							target="_blank">
@@ -140,5 +140,18 @@ const creds = require('@/client_secret.json');
 .table-border {
 	border-bottom: 2px solid #dee2e6;
 	border-top: 2px solid #dee2e6;
+}
+
+.select-box {
+	width: 150px;
+}
+
+.input-box {
+	width: 400px;
+}
+
+.btn-sheets {
+	margin-left: auto;
+	align-self: end;
 }
 </style>
