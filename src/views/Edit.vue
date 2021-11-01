@@ -249,10 +249,14 @@
 	const { GoogleSpreadsheet } = require('google-spreadsheet');
 	const creds = require('@/client_secret.json');
 	export default {
-		name: "AddRow",
+		name: "EditRow",
 		components: {
 			Loading
 		},
+    props: {
+      row: Object,
+      rowIndex: Number
+    },
 		data() {
 			return {
 				devId: '',
@@ -301,105 +305,109 @@
 
 			}
 		},
+    mounted () {
+      this.populateFields()
+    },
 		methods: {
 			async addRow() {
 				this.loading = true
-				const newRow = {
-					devId: this.devId,
-					name: this.name,
-					position: this.position,
-					seniority: this.seniority,
-					updated: new Date().toLocaleString(),
-					comment :this.comment,
-					grade: this.grade,
-					description: this.description,
-					html: this.html,
-					css: this.css,
-					scss: this.scss,
-					less: this.less,
-					bootstrap: this.bootstrap,
-					javascript: this.javascript,
-					jQuery: this.jQuery,
-					angular: this.angular,
-					react: this.react,
-					vue: this.vue,
-					svelte: this.svelte,
-					npm: this.npm,
-					yarn: this.yarn,
-					typescript: this.typescript,
-					vuex: this.vuex,
-					redux: this.redux,
-					utest: this.utest,
-					designtools: this.designtools,
-					csharp: this.csharp,
-					java: this.java,
-					node: this.node,
-					php: this.php,
-					mysql: this.mysql,
-					nosql: this.nosql,
-					jmeter: this.jmeter,
-					postman: this.postman,
-					selenium: this.selenium,
-					cypress: this.cypress,
-					jenkins: this.jenkins,
-					git: this.git,
-					batch: this.batch,
-					bash: this.bash,
-
-				}
-
 				const doc = new GoogleSpreadsheet('1lei8ZdcTPPEP3DXpTMZHdGLCQyCr63adgJWL1LCe2zI');
 				await doc.useServiceAccountAuth(creds);
 				await doc.loadInfo(); 
 				const sheet = doc.sheetsByIndex[0];
-				await sheet.addRow(newRow);
-				
-				this.devId = ''
-				this.name = ''
-				this.position = ''
-				this.seniority = ''
-				this.updated = ''
-				this.comment = ''
-				this.grade = ''
-				this.description = ''
-				this.html = ''
-				this.css = ''
-				this.scss = ''
-				this.less = ''
-				this.bootstrap = ''
-				this.javascript = ''
-				this.jQuery = ''
-				this.angular = ''
-				this.react = ''
-				this.vue = ''
-				this.svelte = ''
-				this.npm = ''
-				this.yarn = ''
-				this.typescript = ''
-				this.vuex = ''
-				this.redux = ''
-				this.utest = ''
-				this.designtools = ''
-				this.csharp = ''
-				this.java = ''
-				this.node = ''
-				this.php = ''
-				this.mysql = ''
-				this.nosql = ''
-				this.jmeter = ''
-				this.postman = ''
-				this.selenium = ''
-				this.cypress = ''
-				this.jenkins = ''
-				this.git = ''
-				this.batch = ''
-				this.bash = ''
+        const rows = await sheet.getRows({
+					offset: 0
+				})				
+          rows[this.$props.rowIndex].devId = this.devId,
+					rows[this.$props.rowIndex].name = this.name,
+					rows[this.$props.rowIndex].position = this.position,
+					rows[this.$props.rowIndex].seniority = this.seniority,
+					rows[this.$props.rowIndex].updated = new Date().toLocaleString(),
+					rows[this.$props.rowIndex].comment = this.comment,
+					rows[this.$props.rowIndex].grade = this.grade,
+					rows[this.$props.rowIndex].description = this.description,
+					rows[this.$props.rowIndex].html = this.html,
+					rows[this.$props.rowIndex].css = this.css,
+					rows[this.$props.rowIndex].scss = this.scss,
+					rows[this.$props.rowIndex].less = this.less,
+					rows[this.$props.rowIndex].bootstrap = this.bootstrap,
+					rows[this.$props.rowIndex].javascript = this.javascript,
+					rows[this.$props.rowIndex].jQuery = this.jQuery,
+					rows[this.$props.rowIndex].angular = this.angular,
+					rows[this.$props.rowIndex].react = this.react,
+					rows[this.$props.rowIndex].vue = this.vue,
+					rows[this.$props.rowIndex].svelte = this.svelte,
+					rows[this.$props.rowIndex].npm = this.npm,
+					rows[this.$props.rowIndex].yarn = this.yarn,
+					rows[this.$props.rowIndex].typescript = this.typescript,
+					rows[this.$props.rowIndex].vuex = this.vuex,
+					rows[this.$props.rowIndex].redux = this.redux,
+					rows[this.$props.rowIndex].utest = this.utest,
+					rows[this.$props.rowIndex].designtools = this.designtools,
+					rows[this.$props.rowIndex].csharp = this.csharp,
+					rows[this.$props.rowIndex].java = this.java,
+					rows[this.$props.rowIndex].node = this.node,
+					rows[this.$props.rowIndex].php = this.php,
+					rows[this.$props.rowIndex].mysql = this.mysql,
+					rows[this.$props.rowIndex].nosql = this.nosql,
+					rows[this.$props.rowIndex].jmeter = this.jmeter,
+					rows[this.$props.rowIndex].postman = this.postman,
+					rows[this.$props.rowIndex].selenium = this.selenium,
+					rows[this.$props.rowIndex].cypress = this.cypress,
+					rows[this.$props.rowIndex].jenkins = this.jenkins,
+					rows[this.$props.rowIndex].git = this.git,
+					rows[this.$props.rowIndex].batch = this.batch,
+					rows[this.$props.rowIndex].bash = this.bash,
 
-				this.message = "New row added!";
+          await rows[this.$props.rowIndex].save()
+
+				this.message = "Row Edited!";
 				this.showMsg = true;
 				this.loading = false
 				
-			}
+			},
+      populateFields () {
+        this.devId = this.$props.row[0]
+				this.name = this.$props.row[1]
+				this.position = this.$props.row[2]
+				this.seniority = this.$props.row[3]
+				this.updated = this.$props.row[4]
+				this.comment = this.$props.row[5]
+				this.grade = this.$props.row[6]
+				this.description = this.$props.row[7]
+				this.html = this.$props.row[8]
+				this.css = this.$props.row[9]
+				this.scss = this.$props.row[10]
+				this.less = this.$props.row[11]
+				this.bootstrap = this.$props.row[12]
+				this.javascript = this.$props.row[13]
+				this.jQuery = this.$props.row[14]
+				this.angular = this.$props.row[15]
+				this.react = this.$props.row[16]
+				this.vue = this.$props.row[17]
+				this.svelte = this.$props.row[18]
+				this.npm = this.$props.row[19]
+				this.yarn = this.$props.row[20]
+				this.typescript = this.$props.row[21]
+				this.vuex = this.$props.row[22]
+				this.redux = this.$props.row[23]
+				this.utest = this.$props.row[24]
+				this.designtools = this.$props.row[25]
+				this.csharp = this.$props.row[26]
+				this.java = this.$props.row[27]
+				this.node = this.$props.row[28]
+				this.php = this.$props.row[29]
+				this.mysql = this.$props.row[30]
+				this.nosql = this.$props.row[31]
+				this.jmeter = this.$props.row[32]
+				this.postman = this.$props.row[33]
+				this.selenium = this.$props.row[34]
+				this.cypress = this.$props.row[35]
+				this.jenkins = this.$props.row[36]
+				this.git = this.$props.row[37]
+				this.batch = this.$props.row[38]
+				this.bash = this.$props.row[39]
+      }
 		}
 	}
 </script>

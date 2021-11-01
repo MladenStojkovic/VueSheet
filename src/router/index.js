@@ -17,6 +17,17 @@ Vue.use(VueRouter)
     // this generates a separate chunk (add.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "add" */ '../views/Add.vue')
+  },
+  {
+    path: '/edit',
+    name: 'Edit',
+    // route level code-splitting
+    // this generates a separate chunk (add.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "add" */ '../views/Edit.vue'),
+    props: (route) => ({
+      ...route.params
+  })
   }
 ]
 

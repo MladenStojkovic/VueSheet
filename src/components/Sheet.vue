@@ -2,7 +2,7 @@
 	<div class="container-fluid">
 		<loading :active.sync="loading" 
         :is-full-page="false"/>
-		<div class="row">
+		<div class="row" v-if="!loading">
 			<main role="main" class="col-md-12 ml-sm-auto col-lg-12 pt-3 px-4">
 				<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 ">
 					<h2>VueSheet List</h2>
@@ -21,7 +21,7 @@
 				<div class="table-responsive">
 				<table class="table table-striped ">
 					<thead>
-					<tr>
+					<tr class="table-border">
 						<th> {{ header[0] }} </th>
 						<th> {{ header[1] }} </th>
 						<th> {{ header[2] }} </th>
@@ -34,7 +34,7 @@
 					</thead>
 					
 					<tbody>
-						<Row :key="row.devId" v-for="(row, index) in filteredData" :row="row" :rowIndex="index" @view-details="doIt" />
+						<Row :key="row.devId" v-for="(row, index) in filteredData" :row="row" :rowIndex="index" @view-details="doIt" @edit="goToEdit" @delete="deleteRow" />
 					</tbody>
 				</table>
 				</div>
@@ -98,8 +98,6 @@ const creds = require('@/client_secret.json');
 					this.rows.push(row._rawData)
 				})
 				this.loading = false
-				console.log(this.rows)
-				console.log(this.header)
 			},
 			switchView(event, selectedIndex) {
 				this.filterRowIndex = selectedIndex
@@ -108,11 +106,39 @@ const creds = require('@/client_secret.json');
 				this.action = e
 				this.actionRow = row
 				this.$modal.show('my-first-modal')
+			},
+			goToEdit(row) {
+				this.actionRow = row
+				this.$router.push({
+        name: 'Edit',
+        params: {
+            row: {...this.filteredData[this.actionRow]},
+						rowIndex: this.actionRow
+        }
+      })
+			},
+			async deleteRow(row) {
+				this.actionRow = row
+				this.loading = true
+				const doc = new GoogleSpreadsheet('1lei8ZdcTPPEP3DXpTMZHdGLCQyCr63adgJWL1LCe2zI');
+				await doc.useServiceAccountAuth(creds);
+				await doc.loadInfo(); 
+				const sheet = doc.sheetsByIndex[0];
+        const rows = await sheet.getRows({
+					offset: 0
+				})
+				await rows[this.actionRow].delete()
+				this.header = ''
+				this.rows = []
+				this.accessSpreadSheet()
 			}
 		}
 	}
 </script>
 
 <style scoped>
-
+.table-border {
+	border-bottom: 2px solid #dee2e6;
+	border-top: 2px solid #dee2e6;
+}
 </style>
