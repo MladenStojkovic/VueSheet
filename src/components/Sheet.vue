@@ -74,8 +74,8 @@ const creds = require('@/client_secret.json');
 			filteredData() {
 				if (this.filter) {
 					return this.rows.filter(row => {
-					const filter = this.filter
-					return row[this.filterRowIndex].includes(filter)
+					const filter = this.filter.toLowerCase()
+					return row[this.filterRowIndex].toLowerCase().includes(filter)
 				})
 				} else return this.rows
 			}
